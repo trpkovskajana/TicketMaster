@@ -31,7 +31,7 @@ public class Event {
     //TODO: ako stigneme da dodademe ovaa funkcionalnost
     //private Integer numOfTickets;
 
-    /*public Event(){}
+    public Event(){}
 
     public Event(LocalDate date, String name, Float duration, Float price, List<Artist> artists,Venue venue) {
         this.date = date;
@@ -39,7 +39,7 @@ public class Event {
         this.duration = duration;
         this.price = price;
         this.artists = artists;
-    }*/
+    }
 
 
 }

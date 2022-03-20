@@ -17,12 +17,12 @@ public class Ticket {
 
     private Integer quantity;
 
-    /*
+
     public Ticket(){}
 
     public Ticket(Event event, Integer quantity) {
         this.event = event;
         this.quantity = quantity;
     }
-     */
+
 }

@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -17,20 +18,22 @@ public class ShoppingCart {
     @ManyToOne
     private User user;
 
-    /*@ManyToMany
+    private LocalDateTime dateCreated;
+
+    @ManyToMany
     private List<Ticket> tickets;
 
     @Enumerated(EnumType.STRING)
-    private ShoppingCartStatus status;*/
+    private ShoppingCartStatus status;
 
-    /*public ShoppingCart() {
+    public ShoppingCart() {
     }
 
     public ShoppingCart(User user) {
         this.dateCreated = LocalDateTime.now();
         this.user = user;
-        this.products = new ArrayList<>();
+        this.tickets = new ArrayList<>();
         this.status = ShoppingCartStatus.CREATED;
-    }*/
+    }
 }
 
