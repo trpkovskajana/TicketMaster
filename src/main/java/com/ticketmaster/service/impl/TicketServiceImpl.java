@@ -38,11 +38,11 @@ public class TicketServiceImpl implements TicketService {
         Ticket ticket = new Ticket(event1,quantity);
         return this.ticketRepository.save(ticket);
     }
-
+/*
     @Override
     public Ticket update(Long id, Event event, int quantity) {
         Ticket ticket = this.findById(id);
-        Event event1 = this.eventRepository.findById(event.getId()).orElseThrow(TicketNotFoundException::new);
+        Event event1 = this.eventRepository.findById(event.getId()).orElseThrow(TicketNotFoundException(id));
         ticket.setEvent(event1);
         ticket.setQuantity(quantity);
         return this.ticketRepository.save(ticket);
@@ -55,9 +55,6 @@ public class TicketServiceImpl implements TicketService {
         this.ticketRepository.delete(ticket);
         return ticket;
     }
-<<<<<<< Updated upstream
-=======
 
 
->>>>>>> Stashed changes
 }

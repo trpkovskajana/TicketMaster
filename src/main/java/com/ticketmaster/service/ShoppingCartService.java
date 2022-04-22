@@ -6,14 +6,9 @@ import com.ticketmaster.model.Ticket;
 import java.util.List;
 
 public interface ShoppingCartService {
-
     List<Ticket> listAllTicketsInShoppingCart(Long cartId);
     ShoppingCart getActiveShoppingCart(String username);
-<<<<<<< Updated upstream
-    ShoppingCart addProductToShoppingCart(String username, Long productId);
-=======
     ShoppingCart addTicketToShoppingCart(String username, Long eventId, int quantity);
     ShoppingCart deleteTicket(String username,Long ticketId);
->>>>>>> Stashed changes
 
 }

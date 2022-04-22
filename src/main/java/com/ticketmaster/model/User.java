@@ -7,11 +7,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
-<<<<<<< Updated upstream
-import java.util.List;
-import java.util.stream.Collectors;
-=======
->>>>>>> Stashed changes
 
 @Data
 @Entity
@@ -37,21 +32,6 @@ public class User implements UserDetails {
     private Role role;
 
 
-<<<<<<< Updated upstream
-   /* @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    private List<ShoppingCart> carts;
-*/
-    public User() {
-    }
-
-    public User(String username, String password, String name, String surname, Role role) {
-        this.username = username;
-        this.password = password;
-        this.name = name;
-        this.surname = surname;
-        this.role = role;
-    }
-=======
     /* @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
      private List<ShoppingCart> carts;*/
 
@@ -63,14 +43,13 @@ public class User implements UserDetails {
            this.password = password;
            this.role = rol       }
       */
-       public User(String username, String password, String name, String surname, Role role) {
-           this.username = username;
-           this.password = password;
-           this.name = name;
-           this.surname = surname;
-           this.role = role;
-       }
->>>>>>> Stashed changes
+    public User(String username, String password, String name, String surname, Role role) {
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.surname = surname;
+        this.role = role;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -97,3 +76,4 @@ public class User implements UserDetails {
         return isEnabled;
     }
 }
+

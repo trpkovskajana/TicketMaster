@@ -1,24 +1,27 @@
 package com.ticketmaster.service.impl;
 
-<<<<<<< Updated upstream
-import com.ticketmaster.exceptions.InvalidUsernameOrPasswordException;
-=======
 import com.ticketmaster.exceptions.InvalidUserIdException;
 import com.ticketmaster.exceptions.InvalidUsernameOrPasswordException;
 import com.ticketmaster.exceptions.PasswordsDoNotMatchException;
->>>>>>> Stashed changes
 import com.ticketmaster.exceptions.UsernameAlreadyExistsException;
 import com.ticketmaster.model.Role;
 import com.ticketmaster.model.User;
 import com.ticketmaster.repository.UserRepository;
 import com.ticketmaster.service.UserService;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, UserDetailsService {
+
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
@@ -28,19 +31,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-<<<<<<< Updated upstream
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        return userRepository.findByUsername(s).orElseThrow(()->new UsernameNotFoundException(s));
-    }
-
-
-    @Override
-    public User register(String username, String password,  String name, String surname, Role userRole) {
-        if (username==null || username.isEmpty()  || password==null || password.isEmpty())
-            throw new InvalidUsernameOrPasswordException();
-=======
     public User findByUsername(String username) {
-       return this.userRepository.findByUsername(username).orElseThrow(com.ticketmaster.exceptions.UsernameNotFoundException::new);
+        return this.userRepository.findByUsername(username).orElseThrow(com.ticketmaster.exceptions.UsernameNotFoundException::new);
     }
 
     @Override
@@ -61,15 +53,10 @@ public class UserServiceImpl implements UserService {
             throw new InvalidUsernameOrPasswordException();
         if (!password.equals(repeatPassword))
             throw new PasswordsDoNotMatchException();
->>>>>>> Stashed changes
         if(this.userRepository.findByUsername(username).isPresent())
             throw new UsernameAlreadyExistsException(username);
         User user = new User(username,passwordEncoder.encode(password),name,surname,userRole);
         return userRepository.save(user);
     }
-<<<<<<< Updated upstream
-
-
-=======
->>>>>>> Stashed changes
 }
+

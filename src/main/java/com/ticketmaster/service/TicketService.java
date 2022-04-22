@@ -13,13 +13,7 @@ public interface TicketService {
 
     Ticket create (Event event, int quantity);
 
-    Ticket update(Long id, Event event, int quantity);
+    //Ticket update(Long id, Event event, int quantity);
 
-<<<<<<< Updated upstream
     Ticket delete (Long id);
-=======
-     Ticket delete (Long id);
->>>>>>> Stashed changes
-
-
 }
