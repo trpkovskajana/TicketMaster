@@ -47,6 +47,7 @@ public class TicketServiceImpl implements TicketService {
         ticket.setQuantity(quantity);
         return this.ticketRepository.save(ticket);
     }
+    */
 
     @Override
     public Ticket delete(Long id) {
@@ -54,4 +55,9 @@ public class TicketServiceImpl implements TicketService {
         this.ticketRepository.delete(ticket);
         return ticket;
     }
+<<<<<<< Updated upstream
+=======
+
+
+>>>>>>> Stashed changes
 }

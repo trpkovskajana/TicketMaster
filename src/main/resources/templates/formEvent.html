@@ -1,0 +1,115 @@
+<div class="container">
+    <br/>
+    <br/>
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-6 p-4" style="background-color: #f8f9fa;">
+            <form method="post" action="/events/add">
+                <input id="id" type="hidden" name="id" th:value="(${event} != null ? ${event.getId()} : '')">
+                <h2> Event info: </h2>
+                <div class="form-group">
+                    <label for="f1">Name</label>
+                    <input type="text"
+                           id="f1"
+                           name="name"
+                           th:value="${event?.name}"
+                           required>
+                </div>
+                <div class="form-group">
+                    <label for="f2">Date</label>
+                    <input type="date"
+                           id="f2"
+                           name="date"
+                           th:value="${event?.date}"
+                           required></div>
+                <br>
+                <div class="form-group">
+                    <label for="f3">Duration</label>
+                    <input type="text"
+                           id="f3"
+                           name="duration"
+                           th:value="${event?.duration}"
+                           required>
+                </div>
+                <div class="form-group">
+                    <label for="f4">Price</label>
+                    <input type="text"
+                           id="f4"
+                           name="price"
+                           th:value="${event?.price}"
+                           required>
+                </div>
+                <div class="form-group">
+                    <label for="f5">Image</label>
+                    <input type="text"
+                           id="f5"
+                           name="url"
+                           th:value="${event?.url}"
+                           required>
+                </div>
+                <div class="form-group">
+                    <label for="f6">Description</label>
+                    <input type="text"
+                           id="f6"
+                           name="description"
+                           th:value="${event?.description}"
+                           required>
+                </div>
+
+                <div class="form-group">
+                    <label>Artists</label><br/>
+                    <select id="f7" name="artistsId" size="5"> <!--multiple="multiple"-->
+                        <!--For each location you should have one <option> like below-->
+                        <!--  <option th:each="course : ${courses}" th:value="${course.id}" th:text="${course.name}" > [course.name]</option>-->
+                        <option th:if="${event} != null"
+                                th:selected="${event.artists != null }"
+                                th:each="artist : ${artists}"
+                                th:value="${artist.getId()}"
+                                th:text="${artist.getName()}">
+                        </option>
+                        <option th:if="${event} == null"
+                                th:each="artist : ${artists}"
+                                th:value="${artist.getId()}"
+                                th:text="${artist.getName()}">
+                        </option>
+
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Venues</label><br/>
+                    <select id="f8" name="venue" size="5"> <!--multiple="multiple"-->
+                        <!--For each location you should have one <option> like below-->
+                        <!--  <option th:each="course : ${courses}" th:value="${course.id}" th:text="${course.name}" > [course.name]</option>-->
+                        <option th:if="${event} != null"
+                                th:selected="${event.venue != null }"
+                                th:each="venue : ${venues}"
+                                th:value="${venue.getId()}"
+                                th:text="${venue.getName()}">
+                        </option>
+                        <option th:if="${event} == null"
+                                th:each="venue : ${venues}"
+                                th:value="${venue.getId()}"
+                                th:text="${venue.getName()}">
+                        </option>
+                    </select>
+                </div>
+                <div class="row">
+                    <div class="col text-center">
+                        <button id="submit" class="btn btn-secondary" type="submit" style="width: 100%;">Submit</button>
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col text-center">
+                        <a id="back" class="btn btn-dark" th:href="@{'/events'}" style="width: 100%;" type="button">
+                            Back to events
+                        </a>
+                    </div>
+                    <br>
+                </div>
+            </form>
+        </div>
+        <div class="col"></div>
+    </div>
+    <br>
+</div>

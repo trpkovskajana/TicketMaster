@@ -1,0 +1,50 @@
+<th:block xmlns:th="http://www.thymeleaf.org">
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h3 class="jumbotron-heading">Shopping cart for
+                <th:block th:if="${#request.getRemoteUser() != null}" th:text="${#request.getRemoteUser()}"></th:block>
+            </h3>
+        </div>
+    </section>
+
+    <div th:if="${hasError}">
+        <h5 class="text-center text-danger" th:text="${error}"></h5>
+    </div>
+
+    <div class="container mb-4">
+        <div class="row">
+            <div class="col-12" th:if="${tickets.size() > 0}">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Event Image</th>
+                            <th scope="col">Event Name</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Total Price</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="ticket : ${tickets}" class="cart-item">
+                            <td><img th:src="${ticket.getEvent().getUrl()}" alt="event image" style="width: 200px;"></td>
+                            <td th:text="${ticket.getEvent().getName()}"></td>
+                            <td th:text="${ticket.getEvent().getPrice()}"></td>
+                            <td th:text="${ticket.getQuantity()}"></td>
+                            <td th:text="${ticket.getQuantity() * ticket.getEvent().getPrice()}" ></td>
+                            <td> <form method="POST" th:action="@{'/shopping-cart/{id}/delete' (id=${ticket.id})}">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                            <br>
+                            <a href="#"><button type="submit" class="btn btn-success">Pay</button></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+

@@ -4,12 +4,10 @@ import com.ticketmaster.exceptions.ShoppingCartNotFoundException;
 import com.ticketmaster.exceptions.TicketAlreadyInShoppingCartException;
 import com.ticketmaster.exceptions.TicketNotFoundException;
 import com.ticketmaster.exceptions.UserNotFoundException;
-import com.ticketmaster.model.ShoppingCart;
-import com.ticketmaster.model.ShoppingCartStatus;
-import com.ticketmaster.model.Ticket;
-import com.ticketmaster.model.User;
+import com.ticketmaster.model.*;
 import com.ticketmaster.repository.ShoppingCartRepository;
 import com.ticketmaster.repository.UserRepository;
+import com.ticketmaster.service.EventService;
 import com.ticketmaster.service.ShoppingCartService;
 import com.ticketmaster.service.TicketService;
 import org.springframework.stereotype.Service;
@@ -23,13 +21,15 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     private final ShoppingCartRepository shoppingCartRepository;
     private final UserRepository userRepository;
     private final TicketService ticketService;
+    private final EventService eventService;
 
     public ShoppingCartServiceImpl(ShoppingCartRepository shoppingCartRepository,
                                    UserRepository userRepository,
-                                   TicketService ticketService) {
+                                   TicketService ticketService, EventService eventService) {
         this.shoppingCartRepository = shoppingCartRepository;
         this.userRepository = userRepository;
         this.ticketService = ticketService;
+        this.eventService = eventService;
     }
 
     @Override
@@ -53,6 +53,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
+<<<<<<< Updated upstream
     public ShoppingCart addProductToShoppingCart(String username, Long ticketId) {
         ShoppingCart shoppingCart = this.getActiveShoppingCart(username);
         Ticket ticket = this.ticketService.findById(ticketId);
@@ -61,6 +62,28 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
                 .collect(Collectors.toList()).size() > 0)
             throw new TicketAlreadyInShoppingCartException(ticketId, username);
         shoppingCart.getTickets().add(ticket);
+=======
+    public ShoppingCart addTicketToShoppingCart(String username, Long eventId, int quantity) {
+        ShoppingCart shoppingCart = this.getActiveShoppingCart(username);
+        Event event = this.eventService.findById(eventId);
+                //.orElseThrow(() -> new TicketNotFoundException(ticketId));
+        Ticket ticket = ticketService.create(event,quantity );
+
+        if(shoppingCart.getTicketList()
+                .stream().filter(i -> i.getEvent().equals(ticket.getEvent())).count() > 0)
+            throw new TicketAlreadyInShoppingCartException(ticket.getId(), username);
+        shoppingCart.getTicketList().add(ticket);
+>>>>>>> Stashed changes
+        return this.shoppingCartRepository.save(shoppingCart);
+    }
+
+    @Override
+    public ShoppingCart deleteTicket(String username,Long ticketId) {
+        Ticket ticket = this.ticketService.findById(ticketId);
+        ShoppingCart shoppingCart = this.getActiveShoppingCart(username);
+        if(shoppingCart.getTicketList()
+                .stream().filter(i -> i.getEvent().equals(ticket.getEvent())).count() > 0)
+            shoppingCart.getTicketList().remove(ticket);
         return this.shoppingCartRepository.save(shoppingCart);
     }
 }

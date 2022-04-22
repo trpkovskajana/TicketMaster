@@ -1,0 +1,61 @@
+<div class="container">
+    <br/>
+    <br/>
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-6 p-4" style="background-color: #f8f9fa;">
+            <form method="post" action="/artists/add-artist">
+                <input id="id" type="hidden" name="id" th:value="(${artist} != null ? ${artist.getId()} : '')">
+                <h2> Artist info: </h2>
+                <div class="form-group">
+                    <label for="f1">Name</label>
+                    <input type="text"
+                           id="f1"
+                           name="name"
+                           th:value="${artist?.name}"
+                           required>
+                </div>
+                <div class="form-group">
+                    <label for="f2">Artist image</label>
+                    <input type="text"
+                           id="f2"
+                           name="url"
+                           th:value="${artist?.url}"
+                           required></div>
+                <br>
+                <div class="form-group">
+                    <label for="f3">Description</label>
+                    <input type="text"
+                           id="f3"
+                           name="description"
+                           th:value="${artist?.description}"
+                           required>
+                </div>
+                <div>
+                    <label>Genre</label><br/>
+                    <select id="f4" name="genre">
+                        <!-- For each tag you should have one <option> like below  -->
+                        <option th:each="genre : ${genres}" th:value="${genre.name}" th:text="${genre.name}"></option>
+                    </select>
+                </div>
+                <br><br>
+                <div class="row">
+                    <div class="col text-center">
+                        <button id="submit" class="btn btn-secondary" type="submit" style="width: 100%;">Submit</button>
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col text-center">
+                        <a id="back" class="btn btn-dark" th:href="@{'/artists'}" style="width: 100%;" type="button">
+                            Back to artists
+                        </a>
+                    </div>
+                    <br>
+                </div>
+            </form>
+        </div>
+        <div class="col"></div>
+    </div>
+    <br>
+</div>
