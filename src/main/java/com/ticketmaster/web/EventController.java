@@ -108,7 +108,30 @@ public class EventController {
         this.eventService.delete(id);
         return "redirect:/events";
     }
+    /*@DeleteMapping("/delete/show-event/{id}")
+    public String deleteEvent(@PathVariable Long id) {
+        this.eventService.deleteById(id);
+        return "redirect:/events";
+    }
 
+     */
+
+
+
+    /*@PostMapping("/events/{id}")
+    public String updateEvent(
+            @RequestParam Long id,
+            @RequestParam String name,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
+            @RequestParam Float price,
+            @RequestParam Float duration,
+            @RequestParam Long category,
+            @RequestParam String url,
+            @RequestParam List<Long> artistsId,
+            @RequestParam Long venue){
+        this.eventService.update(id,date,name,duration,price,url,artistsId,venue);
+        return "redirect:/events";
+    }*/
 }
 
 

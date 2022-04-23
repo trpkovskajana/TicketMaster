@@ -15,13 +15,13 @@ public class ShoppingCart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private LocalDateTime dateCreated;
+
     @ManyToOne
     private User user;
 
-    private LocalDateTime dateCreated;
-
     @ManyToMany
-    private List<Ticket> tickets;
+    private List<Ticket> ticketList;
 
     @Enumerated(EnumType.STRING)
     private ShoppingCartStatus status;
@@ -32,7 +32,7 @@ public class ShoppingCart {
     public ShoppingCart(User user) {
         this.dateCreated = LocalDateTime.now();
         this.user = user;
-        this.tickets = new ArrayList<>();
+        this.ticketList = new ArrayList<>();
         this.status = ShoppingCartStatus.CREATED;
     }
 }

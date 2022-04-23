@@ -21,12 +21,12 @@ public class Venue {
 
     private String address;
 
-    /*public Venue() {
+    public Venue() {
     }
 
     public Venue(String name, String city, String address) {
         Name = name;
         this.city = city;
         this.address = address;
-    }*/
+    }
 }

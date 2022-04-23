@@ -46,13 +46,13 @@
                     </th:block>
                     <br>
                     <div>
-                    <th:block sec:authorize="hasRole('ROLE_ADMIN')">
-                        <a th:href="@{'/events/edit-form/{id}' (id=${event.getId()})}"
-                           class="btn btn-info">
-                            <i class="fa fa-trash">Edit</i>
-                        </a>
-                    </th:block>
-                </div>
+                        <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                            <a th:href="@{'/events/edit-form/{id}' (id=${event.getId()})}"
+                               class="btn btn-info">
+                                <i class="fa fa-trash">Edit</i>
+                            </a>
+                        </th:block>
+                    </div>
                 </div>
             </div>
         </div>

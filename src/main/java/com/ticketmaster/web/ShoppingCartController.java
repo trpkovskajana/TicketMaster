@@ -47,7 +47,7 @@ public class ShoppingCartController {
     public String addTicketToShoppingCart(@PathVariable Long id, @RequestParam int quantity,  HttpServletRequest req, Authentication authentication) {
         try {
             // = (User) authentication.getPrincipal();
-          //  User user = this.userService.findByUsername(req.getRemoteUser());
+            //  User user = this.userService.findByUsername(req.getRemoteUser());
             this.shoppingCartService.addTicketToShoppingCart(req.getRemoteUser(), id, quantity);
             return "redirect:/shopping-cart";
         } catch (RuntimeException exception) {

@@ -29,7 +29,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<Event> listAll() {
+    public List<Event> findAll() {
         return this.eventRepository.findAll();
     }
 
@@ -39,34 +39,38 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Event create(LocalDate date, String name, Float duration, Float price, List<Artist> artists, Venue venue) {
+    public Event create(LocalDate date, String name, Float duration, Float price, String url, String description,List<Long> artistsIds,Long venueId) {
 
-        List<Artist> artistList = this.artistRepository.findAll();
-        Venue venue1 = this.venueRepository.findById(venue.getId()).orElseThrow(VenueNotFoundException::new);
-        Event event = new Event(date,name,duration,price,artistList,venue1);
+        List<Artist> artists = this.artistRepository.findAllById(artistsIds);
+        Venue venue = this.venueRepository.findById(venueId).orElseThrow(VenueNotFoundException::new);
+        Event event = new Event(date,name,duration,price,url,description,artists,venue);
 
         return this.eventRepository.save(event);
     }
 
     @Override
-    public Event update(Long id, LocalDate date, String name, Float duration, Float price, List<Artist> artists, Venue venue) {
+    public Event update(Long id, LocalDate date, String name, Float duration, Float price, String url, String description, List<Long> artistsIds,Long venueId) {
         Event event = this.findById(id);
-        List<Artist> artistList = this.artistRepository.findAll();
-        Venue venue1 = this.venueRepository.findById(venue.getId()).orElseThrow(VenueNotFoundException::new);
+        List<Artist> artists = this.artistRepository.findAllById(artistsIds);
+        Venue venue = this.venueRepository.findById(venueId).orElseThrow(VenueNotFoundException::new);
         event.setDate(date);
         event.setName(name);
         event.setDuration(duration);
         event.setPrice(price);
-        event.setArtists(artistList);
-        event.setVenue(venue1);
+        event.setUrl(url);
+        event.setDescription(description);
+        event.setArtists(artists);
+        event.setVenue(venue);
 
         return this.eventRepository.save(event);
     }
 
     @Override
-    public Event delete(Long id) {
-        Event event = this.findById(id);
+    public Event  delete(Long id) {
+        Event event =  findById(id);
         this.eventRepository.delete(event);
         return event;
     }
+
 }
+

@@ -1,0 +1,29 @@
+<div xmlns:th="http://www.thymeleaf.org">
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading">Ticket Master SHOP</h1>
+            <h3 class="jumbotron-heading">All artists</h3>
+            <a th:href="@{'/artists/add-artist'}" class="btn btn-primary" sec:authorize="hasRole('ROLE_ADMIN')">Add Artist</a>
+
+        </div>
+    </section>
+
+    <div class="container mb-4">
+
+        <div class="card-deck"th:if="${artists.size() > 0}">
+
+            <div class="card col-3" th:each="artist : ${artists}">
+                <img class="card-img-top" th:src="${artist.getUrl()}" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${artist.getName()}"></h5>
+                    <p class="card-text">
+                   Description:  <p th:text="${artist.getDescription()}"></p>
+                   Genre:  <p th:text="${artist.getGenre()}"></p>
+                </div>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
